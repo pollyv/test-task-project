@@ -7,6 +7,8 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth';
 
+definePageMeta({ middleware: 'auth' });
+
 const authStore = useAuthStore();
 const error = ref<string | null>(null);
 
