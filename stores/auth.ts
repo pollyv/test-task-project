@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import md5 from 'md5';
-import { User } from '~/types/user';
+import type { User } from '~/types/user';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
