@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "name": "Ethiopian Yirgacheffe",
+    "status": "available",
+    "date_created": "2025-01-15",
+    "price": 1899,
+    "type": "beans"
+  },
+  {
+    "id": 2,
+    "name": "Colombian Supremo",
+    "status": "out_of_stock",
+    "date_created": "2025-01-16",
+    "price": 1550,
+    "type": "ground"
+  },
+  {
+    "id": 3,
+    "name": "Guatemalan Antigua",
+    "status": "available",
+    "date_created": "2025-01-17",
+    "price": 1975,
+    "type": "beans"
+  },
+  {
+    "id": 4,
+    "name": "Brazilian Santos Drip",
+    "status": "available",
+    "date_created": "2025-01-18",
+    "price": 1299,
+    "type": "drip"
+  },
+  {
+    "id": 5,
+    "name": "Kenyan AA",
+    "status": "available",
+    "date_created": "2025-01-19",
+    "price": 2200,
+    "type": "beans"
+  },
+  {
+    "id": 6,
+    "name": "Sumatra Mandheling",
+    "status": "out_of_stock",
+    "date_created": "2025-01-20",
+    "price": 1725,
+    "type": "ground"
+  },
+  {
+    "id": 7,
+    "name": "Costa Rican Tarrazu",
+    "status": "available",
+    "date_created": "2025-01-21",
+    "price": 2050,
+    "type": "beans"
+  },
+  {
+    "id": 8,
+    "name": "Peruvian Chanchamayo",
+    "status": "available",
+    "date_created": "2025-01-22",
+    "price": 1699,
+    "type": "ground"
+  },
+  {
+    "id": 9,
+    "name": "Honduran Marcala Drip",
+    "status": "out_of_stock",
+    "date_created": "2025-01-23",
+    "price": 1375,
+    "type": "drip"
+  },
+  {
+    "id": 10,
+    "name": "Jamaican Blue Mountain",
+    "status": "available",
+    "date_created": "2025-01-24",
+    "price": 4500,
+    "type": "beans"
+  },
+  {
+    "id": 11,
+    "name": "Mexican Chiapas",
+    "status": "available",
+    "date_created": "2025-01-25",
+    "price": 1499,
+    "type": "ground"
+  }
+]
