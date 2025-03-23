@@ -14,11 +14,12 @@ export const useAuthStore = defineStore('auth', {
             const user = users.find(
                 (u) => u.credentials.username === username && u.credentials.passphrase === md5(password)
             );
-
             if (user) {
                 this.user = user;
                 this.isAuthenticated = true;
-                localStorage.setItem('auth', JSON.stringify({ user, isAuthenticated: true }));
+                if (process.client) {
+                    localStorage.setItem('auth', JSON.stringify({ user, isAuthenticated: true }));
+                }
                 await navigateTo('/account');
             } else {
                 throw new Error('Введены неверные данные авторизации. Попробуйте ещё раз');
@@ -27,15 +28,19 @@ export const useAuthStore = defineStore('auth', {
         logout() {
             this.user = null;
             this.isAuthenticated = false;
-            localStorage.removeItem('auth');
+            if (process.client) {
+                localStorage.removeItem('auth');
+            }
             navigateTo('/');
         },
         restoreSession() {
-            const authData = localStorage.getItem('auth');
-            if (authData) {
-                const { user, isAuthenticated } = JSON.parse(authData);
-                this.user = user;
-                this.isAuthenticated = isAuthenticated;
+            if (process.client) {
+                const authData = localStorage.getItem('auth');
+                if (authData) {
+                    const { user, isAuthenticated } = JSON.parse(authData);
+                    this.user = user;
+                    this.isAuthenticated = isAuthenticated;
+                }
             }
         },
     },
