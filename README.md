@@ -1,75 +1,139 @@
-# Nuxt Minimal Starter
+# Тестовые задания для TW
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Описание
+Веб-приложение с авторизацией и страницей личного кабинета, отображающей таблицу с информацией о кофе. Построено на Nuxt 3 с использованием TypeScript, Pinia и SCSS.
 
-## Setup
+## Использованные технологии
+- **Nuxt 3**: Основной фреймворк для SSR и CSR.
+- **TypeScript**: Строгая типизация для улучшения поддержки кода.
+- **Pinia**: Управление состоянием приложения (авторизация).
+- **SCSS**: Стилизация компонентов и страниц.
+- **Nitro**: Серверная часть для обработки API-запросов.
+- **MD5**: Хэширование паролей пользователей.
 
-Make sure to install dependencies:
+## Почему TypeScript?
+TypeScript выбран для обеспечения строгой типизации, что упрощает отладку, масштабирование и поддержку кода, особенно при работе с данными (пользователи, продукты).
 
-```bash
-# npm
-npm install
+## Развертывание на PROD
+Для развертывания приложения на продакшен-сервере выполните следующие шаги:
 
-# pnpm
-pnpm install
+1. **Установите зависимости**:
+   Убедитесь, что у вас установлен Node.js (рекомендуемая версия: 18.x или выше). Склонируйте репозиторий и установите зависимости:
+   ```bash
+   git clone <repository-url>
+   cd test-task-project
+   npm install
+   ```
 
-# yarn
-yarn install
+2. **Соберите проект**:
+   Выполните сборку приложения для продакшена. Nuxt 3 использует Nitro для создания оптимизированного серверного бандла:
+   ```bash
+   npm run build
+   ```
+   После успешной сборки в папке `.output` появятся необходимые файлы.
 
-# bun
-bun install
+3. **Запустите сервер**:
+   Запустите собранное приложение в продакшен-режиме:
+   ```bash
+   npm run start
+   ```
+   По умолчанию сервер будет доступен на http://localhost:3000. Если порт занят, укажите другой через переменную окружения (см. ниже).
+
+4. **Настройте окружение (опционально)**:
+    - **Порт и хост**: Если нужно изменить порт или хост, создайте файл `.env` в корне проекта:
+      ```text
+      NUXT_PORT=3000
+      NUXT_HOST=0.0.0.0
+      ```
+      Или задайте их при запуске:
+      ```bash
+      NUXT_PORT=4000 npm run start
+      ```
+
+    - **Продакшен-режим**: Убедитесь, что переменная окружения `NODE_ENV` установлена в `production`:
+      ```bash
+      set NODE_ENV=production && npm run start  # Windows
+      NODE_ENV=production npm run start         # Linux/Mac
+      ```
+
+5. **Использование PM2 (рекомендуется для продакшена)**:
+   Для стабильной работы на сервере установите PM2 глобально:
+   ```bash
+   npm install -g pm2
+   ```
+   Запустите приложение через PM2:
+   ```bash
+   pm2 start .output/server/index.mjs --name "test-task-project"
+   ```
+   Сохраните процесс:
+   ```bash
+   pm2 save
+   ```
+   Настройте автозапуск при перезагрузке сервера:
+   ```bash
+   pm2 startup
+   ```
+
+6. **Проверка**:
+   Откройте браузер и перейдите на http://<your-server-ip>:3000. Убедитесь, что страница логина отображается, а после авторизации вы видите страницу `/account`.
+
+## Реализованные функции
+- **Авторизация**: Проверка логина и пароля (хэшированного через MD5) с сохранением сессии через localStorage (клиент) и cookie (сервер/клиент).
+- **Страница аккаунта**: Отображение таблицы с 11 видами кофе (зёрна, молотый, дрипы) с ценами в рублях. Поддержка фильтрации по дате создания (`date_created`) и статусу (`available`/`out_of_stock`).
+- **Выход**: Очистка сессии и перенаправление на страницу логина.
+
+## Структура проекта
+```text
+test-task-project/
+├── assets/
+│   └── scss/
+│       └── main.scss
+├── components/
+│   ├── Filters.vue
+│   ├── LoginForm.vue
+│   └── ProductTable.vue
+├── middleware/
+│   └── global-auth.global.ts
+├── pages/
+│   ├── index.vue
+│   └── account.vue
+├── stores/
+│   └── auth.ts
+├── server/
+│   └── api/
+│       ├── users.ts
+│       └── products.ts
+├── types/
+│   ├── user.ts
+│   └── product.ts
+├── public/
+├── .eslintrc
+├── .gitignore
+├── app.vue
+├── nuxt.config.ts
+├── products.json
+├── README.md
+├── users.json
 ```
 
-## Development Server
+## Установка и запуск локально
+1. **Склонируйте репозиторий**:
+   ```bash
+   git clone <repository-url>
+   cd test-task-project
+   ```
 
-Start the development server on `http://localhost:3000`:
+2. **Установите зависимости**:
+   ```bash
+   npm install
+   ```
 
-```bash
-# npm
-npm run dev
+3. **Запустите в режиме разработки**:
+   ```bash
+   npm run dev
+   ```
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+4. **Откройте в браузере**:
+   ```text
+   http://localhost:3000
+   ```
